@@ -242,7 +242,7 @@
             xhr.setRequestHeader("accept", "application/json");
             xhr.setRequestHeader("Authorization", "Basic " + btoa(authString));
 
-            console.log(jsonData);
+            // console.log(jsonData);
             xhr.send(jsonData);
             xhr.onreadystatechange = function () {
                 console.log(xhr.responseText);
