@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Start Copying -->
+
+    <style>
+        /* Font */
+
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+
+        /* Font Lancel */
+
+        @font-face {
+            font-family: LancelFont-bold;
+            font-weight: bold;
+            src: url("../font/lc/LancelFont-Bold.otf");
+        }
+
+        @font-face {
+            font-family: LancelFont-thin;
+            font-weight: 300;
+            src: url("../font/lc/LancelFont-Thin.otf");
+        }
+
+        :root {
+            --font-lc-bold: "LancelFont-bold";
+            --font-lc-thin: "LancelFont-thin";
+            --hero-bg-lc-desktop: url("https://cdn.shopify.com/s/files/1/0606/9983/6669/files/lc-desktop.jpg?v=1673608878");
+            --hero-bg-lc-mobile: url("https://cdn.shopify.com/s/files/1/0606/9983/6669/files/lc-mobile.jpg?v=1673608878");
+        }
+
+        /* Generic settings */
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        body {
+            /*  font-family: var(--font-lc-thin); */
+            font-weight: 400;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Header settings */
+
+        .header-form,
+        .form-footer {
+            display: grid;
+            gap: 8px;
+        }
+
+        .header-picture {
+            /* background: no-repeat var(--hero-bg-pq-mobile); */
+            /* background: no-repeat var(--hero-bg-tb-mobile); */
+            background: no-repeat var(--hero-bg-lc-mobile);
+            background-size: cover;
+            background-position: center;
+            max-width: 100%;
+            height: 250px;
+            box-sizing: content-box;
+        }
+
+        .header-form .logo {
+            margin: 10px auto 0 auto;
+        }
+
+        .title {
+            /* font-family: var(--font-pq-bold); */
+            /* font-family: var(--font-tb-bold); */
+            /* font-family: var(--font-lc-bold); */
+            font-size: 2.5rem;
+            line-height: 1;
+            /* font-weight: 500; */
+        }
+
+        .subtitle p {
+            line-height: 1.5;
+        }
+
+        /* Form settings */
+
+        .form-generic {
+            box-sizing: border-box;
+            height: calc(1.5em + 0.75rem + 2px);
+
+            /* font-family: var(--font-pq-light), sans-serif; */
+            /* font-family: var(--font-tb-regular), sans-serif; */
+            /* font-family: var(--font-lc-thin), sans-serif; */
+            font-size: 1.8rem;
+            line-height: 1.5;
+            font-weight: 300;
+
+            border: 0px;
+            border-bottom: solid 3px rgba(0, 0, 0, 0.5);
+            color: hsl(0deg 0% 0%);
+            margin-bottom: 1.2rem
+        }
+
+        .form-generic::-webkit-input-placeholder {
+            color: black;
+        }
+
+        .form-generic[type="checkbox"] {
+            height: auto;
+        }
+
+        input.btn-submit {
+            margin-top: 32px;
+            margin-bottom: 43px;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-radius: 0px;
+            background-color: black;
+            border-color: black;
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: hsl(0deg 0% 100%);
+        }
+
+        .btn-submit:hover {
+            background-color: hsl(0deg, 0%, 30%);
+            border-color: hsl(0deg, 0%, 30%);
+        }
+
+        .btn-submit:not(:disabled):not(.disabled) {
+            cursor: pointer;
+        }
+
+        .form-visible {
+            display: grid;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 90vw;
+        }
+
+        /* Footer settings */
+
+        .footer-text-generic {
+            line-height: 1.67;
+            color: hsl(345deg 6% 13%);
+        }
+
+        #privacy-data {
+            text-align: left;
+        }
+
+        #privacy-data :is(p, h3) {
+            text-align: left;
+        }
+
+        #privacy-data h3 {
+            margin-block-end: 0;
+        }
+
+        @media screen and (min-width: 750px) {
+            .form-visible {
+                max-width: 50vw;
+            }
+
+            .form-generic {
+                padding-left: 2rem !important;
+            }
+
+            .title {
+                font-size: 3rem;
+            }
+
+            .header-picture {
+                background: no-repeat var(--hero-bg-lc-desktop);
+                background-size: cover;
+            }
+        }
+    </style>
+    <script>
+        // window.addEventListener("load", (event) => {
+        //     document.getElementById("redirect").setAttribute("value", document.location.hostname);
+        //     document.getElementById("sourceUrl").setAttribute("value", document.location.href);
+        // });
+
+        function submitForm() {
+            // Salva data attuale in variabile con formato YYYY-MM-DD
+            var d = new Date();
+            var formattedDate = d.getFullYear() + '-' + (d.getMonth() + 1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0');
+
+            // Recupera in variabili i due consensi di Privacy e Marketing
+            var privacyValue = document.querySelectorAll("input[name='privacyConsent']");
+            for (var i = 0; i < privacyValue.length; i++) {
+                if (privacyValue[i].checked) {
+                    var privacyConsentValue = privacyValue[i].value;
+                    break;
+                }
+            }
+            var marketingValue = document.querySelectorAll("input[name='marketingConsent']");
+            for (var i = 0; i < marketingValue.length; i++) {
+                if (privacyValue[i].checked) {
+                    var marketingConsentValue = marketingValue[i].value;
+                    break;
+                }
+            }
+
+            // Crea oggetto "form" contenente i dati inseriti nel form
+            var form = document.getElementById("dataCapture-form");
+
+            // Crea un oggetto "dati" con la struttura richiesta da inviare poi via API
+
+            // Da fare: check dei campi corretti
+            var data = {
+                emailAddress: form.inputEmail.value,
+                attributes: [
+                    { name: "user.FirstName", value: form.inputName.value },
+                    { name: "user.LastName", value: form.inputLastname.value },
+                    { name: "user.isoLanguageCode", value: form.language.value },
+                    { name: "user.Title", value: form.inputGender.value },
+                    { name: "user.DateOfBirth", value: form.birthDate.value },
+                    { name: "user.CustomAttribute.RegistrationDate", value: formattedDate },
+                    { name: "user.CustomAttribute.PrivacyConsentDate", value: formattedDate },
+                    { name: "user.CustomAttribute.PrivacyConsent", value: privacyConsentValue },
+                    { name: "user.CustomAttribute.MarketingConsent", value: marketingConsentValue },
+                    { name: "user.CustomAttribute.ImportSource", value: "Data Capture Form" }
+
+                ]
+            };
+
+            // Converte l'oggetto dati in formato JSON
+            var jsonData = JSON.stringify(data);
+
+            // Credenziali per l'autenticazione base API
+            var apiUser = "apiuserpq@piquadro.com";
+            var apiPwd = "Juey64-HYw0A";
+            var authString = apiUser + ":" + apiPwd;
+
+            var xhr = new XMLHttpRequest();
+            // xhr.open("POST", "https://news.piquadro.com/api/rest/v19/contact/create");
+            xhr.open("POST", "https://hook.eu1.make.com/69drjpobtanf5jg3g44scpyotverol7d");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Basic " + btoa(authString));
+
+            console.log(jsonData);
+            xhr.send(jsonData);
+            xhr.onreadystatechange = function () {
+                console.log(xhr.responseText);
+                // if (xhr.readyState === 4) {
+                //     if (xhr.status === 200) {
+                //         console.log(xhr.responseText);
+                //         // window.location.href = "/";
+                //     } else {
+                //         alert("Errore durante l'inoltro dei dati. Si prega di ricaricare la pagina e riprovare.");
+                //     }
+                // }
+            };
+
+        }
+
+        // function redirectToHomepage() {
+        //     window.location.href = "/";
+        // }
+
+    </script>
+    <div class="header-form">
+
+        <!-- <div class="header-picture"> <img src="desktop.jpg" class="img-fluid" alt="heroimage">
+        <div class="logo"><img src="https://cdn.shopify.com/s/files/1/0606/9983/6669/files/lancel-logo.png?v=1637834467" class="img-fluid mx-auto d-block" alt="logo" width="244"></div> 
+        <div class="title">
+            <h1>SUBSCRIBE TO OUR NEWSLETTER</h1> 
+        </div> -->
+
+        <div class="subtitle">
+            <p>New collections, exclusive collaborations, events: the Maison will no longer be a secret to you!</p>
+            <p>Delivery is offered with your first purchase on Lancel.com</p>
+        </div>
+    </div>
+    <main class="form"> <!-- Inserire URL qui! -->
+        <form id="dataCapture-form">
+            <div class="form-hidden">
+                <input type="hidden" name="storeView" value=""> <!--Store view-->
+                <input type="hidden" name="id" value=""> <!--ID-->
+                <input type="hidden" name="brand" value=""> <!--Brand-->
+                <input type="hidden" id="user.CustomAttribute.RegistrationDate" name="user.CustomAttribute.RegistrationDate" value=""> <!--Data Registrazione-->
+                <input type="hidden" name="user.CustomAttribute.PrivacyConsentDate" value=""> <!--Data consenso Privacy-->
+                <input type="hidden" name="dataProfilazione" value=""> <!--Data consenso Profilazione-->
+                <input type="hidden" name="dataMarketing" value=""> <!--Data consenso Marketing-->
+                <input type="hidden" name="user.CustomAttribute.ImportSource" value=""> <!--Import Source-->
+                <input type="hidden" id="sourceUrl" name="source"> <!--Source-->
+                <input type="hidden" name="medium" value=""> <!--Medium-->
+                <input type="hidden" name="campaign" value=""> <!--Campaign-->
+                <input type="hidden" name="canale" value="ecommerce"> <!--Canale-->
+                <input type="hidden" name="store" value="online"> <!--Store-->
+            </div>
+            <div class="form-visible">
+                <input type="text" class="form-generic" id="inputName" placeholder="First name*" name="user.FirstName" required="" />
+                <input type="text" class="form-generic" id="inputLastname" placeholder="Last name*" name="user.LastName" required="" />
+                <input type="email" class="form-generic" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" id="inputEmail" placeholder="Email*" name="user.Email" required="" value="" />
+                <select class="form-generic" id="inputGender" name="user.Title">
+                    <option selected="selected" disabled="disabled">Gender</option>
+                    <option name="optradio" value="1">Male</option>
+                    <option name="optradio" value="2">Female</option>
+                    <option name="optradio" value="0">Other</option>
+                    <option name="optradio" value="-1">Prefer not to say</option>
+                </select>
+                <select class="form-generic" id="newsletterTopic" name="">
+                    <option selected="selected" disabled="disabled">Which collections are you interested in?</option>
+                    <option name="optradio" value="w">Women</option>
+                    <option name="optradio" value="m">Men</option>
+                    <option name="optradio" value="b">Both</option>
+                </select>
+                <select class="form-generic" id="language" name="user.isoLanguageCode">
+                    <option selected="selected" disabled="disabled">Language</option>
+                    <option name="optradio" value="it">Italian</option>
+                    <option name="optradio" value="en">English</option>
+                    <option name="optradio" value="fr">French</option>
+                    <option name="optradio" value="es">Spanish</option>
+                    <option name="optradio" value="de">German</option>
+                    <option name="optradio" value="ru">Russian</option>
+                </select>
+                <input type="text" id="birthDate" class="form-generic" name="user.DateOfBirth" placeholder="Date of birth" onfocus="(this.type='date')" onblur="(this.type='text')" />
+                <input id="inputsubmit" type="submit" class="btn-submit" value="SUBSCRIBE" onclick="submitForm()" />
+            </div>
+
+            <div class="form-visible align-left" id="privacy-data">
+                <p>Ti invitiamo a consultare la nostra informativa sul trattamento dei dati sempre disponibile qui <a href="https://lancel.com/pages/privacy-policy" target="_blank">Privacy Policy</a>.
+                    Scegli le opzioni che preferisci rilasciando il consenso specifico per le seguenti attività:</p>
+                <div class="radio privacyRadioBtn">
+                    <h3>Restiamo in contatto</h3>
+                    <input type="radio" name="privacyConsent" value="1" required><label for="privacy-si" checked>Si</label>
+                    <input type="radio" name="privacyConsent" value="0"><label for="privacy-no">No</label>
+                    <p>Scegliendo sì, riceverai per prim* tutte le novità e le promozioni dei brand del Gruppo Piquadro (via e-mail, WhatsApp, telefono e social network).</p>
+                </div>
+                <div class="radio marketingRadioBtn">
+                    <h3>Per te un'esperienza personalizzata</h3>
+                    <input type="radio" name="marketingConsent" value="1" required><label for="privacy-si">Si</label>
+                    <input type="radio" name="marketingConsent" value="0"><label for="privacy-no">No</label>
+                    <p>Scegliendo sì, riceverai comunicazioni e promozioni in linea con i tuoi interessi (grazie all’attività di profilazione e analisi dei comportamenti d’acquisto).</p>
+                </div>
+            </div>
+
+        </form>
+
+        <!-- <div class="form-footer form-visible">
+            <p id="footertext" class="footer-text-generic">Having read the <a href="https://lancel.com/pages/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> carefully, entered my email address and by pressing the “Subscribe” button, I consent to Piquadro SPA and other group companies processing my personal data for the marketing purposes related to the services offered and market research.</p>
+        </div> -->
+    </main>
+
+    <!-- Stop Copying -->
+</body>
+
+</html>
