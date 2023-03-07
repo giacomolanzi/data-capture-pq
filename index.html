@@ -213,19 +213,19 @@
 
             // Da fare: check dei campi corretti
             var data = {
-                emailAddress: form.inputEmail.value,
-                attributes: [
-                    { name: "user.FirstName", value: form.inputName.value },
-                    { name: "user.LastName", value: form.inputLastname.value },
-                    { name: "user.isoLanguageCode", value: form.language.value },
-                    { name: "user.Title", value: form.inputGender.value },
-                    { name: "user.DateOfBirth", value: form.birthDate.value },
-                    { name: "user.CustomAttribute.RegistrationDate", value: formattedDate },
-                    { name: "user.CustomAttribute.PrivacyConsent", value: privacyConsentValue },
-                    { name: "user.CustomAttribute.PrivacyConsentDate", value: formattedDate },
-                    { name: "user.CustomAttribute.MarketingConsentDate", value: marketingConsentValue },
-                    { name: "user.CustomAttribute.ImportSource", value: "Data Capture Form" },
-                    { name: "user.CustomAttribute.StoreView", value: "" }
+                "emailAddress": form.inputEmail.value,
+                "attributes": [
+                    { "name": "user.FirstName", "value": form.inputName.value },
+                    { "name": "user.LastName", "value": form.inputLastname.value },
+                    { "name": "user.isoLanguageCode", "value": form.language.value },
+                    { "name": "user.Title", "value": form.inputGender.value },
+                    { "name": "user.DateOfBirth", "value": form.birthDate.value },
+                    { "name": "user.CustomAttribute.RegistrationDate", "value": formattedDate },
+                    { "name": "user.CustomAttribute.PrivacyConsent", "value": privacyConsentValue },
+                    { "name": "user.CustomAttribute.PrivacyConsentDate", "value": formattedDate },
+                    { "name": "user.CustomAttribute.MarketingConsentDate", "value": marketingConsentValue },
+                    { "name": "user.CustomAttribute.ImportSource", "value": "Data Capture Form" },
+                    { "name": "user.CustomAttribute.StoreView", "value": "" }
 
                 ]
             };
