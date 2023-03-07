@@ -245,14 +245,14 @@
             xhr.setRequestHeader("accept", "application/json");
             xhr.setRequestHeader("Authorization", "Basic " + btoa(authString));
 
-            // console.log(jsonData);
+            console.log(jsonData);
             xhr.send(jsonData);
             xhr.onreadystatechange = function () {
                 console.log(xhr.responseText);
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         console.log(xhr.responseText);
-                        window.location.href = "/";
+                        // window.location.href = "/";
                     } else {
                         alert("Errore durante l'inoltro dei dati. Si prega di ricaricare la pagina e riprovare.");
                     }
