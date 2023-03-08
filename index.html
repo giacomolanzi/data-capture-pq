@@ -184,17 +184,10 @@
     </style>
     <script>
         function submitForm() {
-            // estrarre il parametro storeId dall'url (storeID identifica i negozi fisici)
+            // estrarre parametri dall'url
             const url = window.location.href;
             const urlParams = new URLSearchParams(url.search);
-            if (urlParams.get('Channel') == "Store") {              // se l'url ha come query Channel con valore Store
-                const channel = urlParams.get('Channel');           // assegna il valore di ?Channel al parametro channel
-                const storeId = urlParams.get('StoreId');           // assegna StoreId
-                const storeType = urlParams.get('StoreType');       // assegna StoreType
-                const storeBrand = urlParams.get('StoreBrand');     // assegna StoreBrand
-            } else {                                                // se la query Channel non è presente, quindi la pagina è in e-commerce
-                const channel = "ecommerce";                        // assegna a Channel il valore "ecommerce"
-            }
+
 
             // Salva data attuale in variabile con formato YYYY-MM-DD
             var d = new Date();
@@ -216,14 +209,10 @@
                 }
             }
 
-            // Estrarre store view dall'url tramite regex
-            // CODICE DA INSERIRE
-
             // Crea oggetto "form" contenente i dati inseriti nel form
             var form = document.getElementById("dataCapture-form");
 
             // Crea un oggetto "dati" con la struttura richiesta da inviare poi via API
-
             // Da fare: check dei campi corretti
             var data = {
                 "emailAddress": form.inputEmail.value,
@@ -237,9 +226,9 @@
                     { "name": "user.CustomAttribute.PrivacyConsent", "value": privacyConsentValue },
                     { "name": "user.CustomAttribute.PrivacyConsentDate", "value": formattedDate },
                     { "name": "user.CustomAttribute.MarketingConsentDate", "value": marketingConsentValue },
-                    { "name": "user.CustomAttribute.ImportSource", "value": "Data Capture Form" },
-                    { "name": "user.CustomAttribute.Store", "value": storeId }
-
+                    { "name": "user.CustomAttribute.ImportSource", "value": "DataCaptureForm" },
+                    { "name": "user.CustomAttribute.RegistrationShopName", "value": "ecommerce" },
+                    { "name": "user.CustomAttribute.CollectionPreferences", "value": form.newsletterTopic.value }
                 ]
             };
 
@@ -315,7 +304,7 @@
                     <option name="optradio" value="0">Other</option>
                     <option name="optradio" value="-1">Prefer not to say</option>
                 </select>
-                <select class="form-generic" id="newsletterTopic" name="">
+                <select class="form-generic" id="newsletterTopic" name="user.CustomAttribute.CollectionPreferences">
                     <option selected="selected" disabled="disabled">Which collections are you interested in?</option>
                     <option name="optradio" value="w">Women</option>
                     <option name="optradio" value="m">Men</option>
