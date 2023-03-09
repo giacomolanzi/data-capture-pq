@@ -184,16 +184,39 @@
     </style>
     <script>
         function submitForm() {
-            // estrarre parametri dall'url
+            //
+            // Variabili ambientali
+            //
+
+            // Estrarre parametri dall'url
             const url = window.location.href;
+            const domain = window.location.hostname;
             const urlParams = new URLSearchParams(url.search);
 
+            // Controlla da quale dominio arriva il form e assegna variabile "brand"
+            switch (domain) {
+                case "www.piquadro.com":
+                    var brand = "PQ";
+                    break;
+                case "www.thebridge.it":
+                    var brand = "TB";
+                    break;
+                case "lancel.com":
+                    var brand = "LC";
+                    break;
+                default:
+                    var brand = ""
+            }
+
+            // Controlla la store view dall'url e la assegna ad una variabile "storeView"
+            const path = url.substring(url.indexOf(domain) + domain.length + 1);
+            const storeView = path.substring(0, path.indexOf("/"));
 
             // Salva data attuale in variabile con formato YYYY-MM-DD
             var d = new Date();
             var formattedDate = d.getFullYear() + '-' + (d.getMonth() + 1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0');
 
-            // Recupera in variabili i due consensi di Privacy e Marketing
+            // Recupera in variabili per i due consensi di Privacy e Marketing
             var privacyValue = document.querySelectorAll("input[name='privacyConsent']");
             for (var i = 0; i < privacyValue.length; i++) {
                 if (privacyValue[i].checked) {
@@ -209,7 +232,10 @@
                 }
             }
 
-            // Crea oggetto "form" contenente i dati inseriti nel form
+            //
+            // Crea oggetto "form" contenente i dati inseriti nel form da inviare come JSON
+            //
+
             var form = document.getElementById("dataCapture-form");
 
             // Crea un oggetto "dati" con la struttura richiesta da inviare poi via API
@@ -228,7 +254,12 @@
                     { "name": "user.CustomAttribute.MarketingConsentDate", "value": marketingConsentValue },
                     { "name": "user.CustomAttribute.ImportSource", "value": "DataCaptureForm" },
                     { "name": "user.CustomAttribute.RegistrationShopName", "value": "ecommerce" },
-                    { "name": "user.CustomAttribute.CollectionPreferences", "value": form.newsletterTopic.value }
+                    { "name": "user.CustomAttribute.CollectionPreferences", "value": form.newsletterTopic.value },
+                    { "name": "user.CustomAttribute.Brand", "value": brand },
+                    { "name": "user.CustomAttribute.StoreView", "value": storeView },
+                    { "name": "user.CustomAttribute.FormSource", "value": "" },
+                    { "name": "user.CustomAttribute.FormMedium", "value": "" },
+                    { "name": "user.CustomAttribute.FormCampaign", "value": "" }
                 ]
             };
 
@@ -279,7 +310,7 @@
     <main class="form"> <!-- Inserire URL qui! -->
         <form id="dataCapture-form">
             <div class="form-hidden">
-                <input type="hidden" name="storeView" value=""> <!--Store view-->
+
                 <input type="hidden" name="id" value=""> <!--ID-->
                 <input type="hidden" name="brand" value=""> <!--Brand-->
                 <input type="hidden" id="user.CustomAttribute.RegistrationDate" name="user.CustomAttribute.RegistrationDate" value=""> <!--Data Registrazione-->
